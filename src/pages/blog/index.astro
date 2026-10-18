@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import Page from '../../layouts/Page.astro';
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Page title="News" description="News and updates from Test Client Ltd.">
+  <h1>News</h1>
+  <ul>
+    {posts.map((p) => <li><a href={`/blog/${p.id}`}>{p.data.title}</a></li>)}
+  </ul>
+</Page>
